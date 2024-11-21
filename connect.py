@@ -9,6 +9,8 @@ led = machine.Pin('LED', machine.Pin.OUT)
 def connect_to_wifi():
     try:
         wlan = network.WLAN(network.STA_IF)
+        wlan.disconnect()
+        time.sleep(2)
         wlan.active(True)
         wlan.connect(SSID, PASSWORD)
         
@@ -17,7 +19,7 @@ def connect_to_wifi():
         while not wlan.isconnected():
             led.on()
             print("Waiting for Connection ...")
-            time.sleep(0.5)
+            time.sleep(0.75)
             led.off()
             print(wlan.status())
             if wlan.status() <= -1:
@@ -32,5 +34,6 @@ def connect_to_wifi():
         
 def disconnect_wifi():
     wlan = network.WLAN(network.STA_IF)
-    wlan.active(False)
+    wlan.disconnect()
+    print(wlan.status())
     print("Disconnected from WiFi.")
