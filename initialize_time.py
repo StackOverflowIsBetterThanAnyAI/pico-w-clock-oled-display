@@ -1,6 +1,7 @@
 import urequests
 import time
 import machine
+import network
 
 led = machine.Pin('LED', machine.Pin.OUT)
 
@@ -17,6 +18,8 @@ def get_time_from_api():
     led.on()
     try:
         print("Fetching current time ...")
+        wlan = network.WLAN(network.STA_IF)
+        print(wlan.status())
         response = urequests.get("https://timeapi.io/api/time/current/zone?timeZone=Europe%2FBerlin")
         print(response.status_code)
         
