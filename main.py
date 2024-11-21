@@ -52,7 +52,7 @@ def main():
                           
             print(time_data)
             
-            if current_second == 0:
+            if current_hour == 0 and current_minute == 0 and current_second == 0:
                 try:
                     led.off()
                     fetch_start = time.time()
