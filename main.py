@@ -7,12 +7,16 @@ led = machine.Pin('LED', machine.Pin.OUT)
 
 led_on = False
 
+def fetch_time():
+    connect.connect_to_wifi()
+    time_data = initialize_time.get_time_from_api()
+    connect.disconnect_wifi()
+    return time_data
+
 def main():
     global led_on
     try:
-        connect.connect_to_wifi()
-        time_data = initialize_time.get_time_from_api()
-        connect.disconnect_wifi()
+        time_data = fetch_time()
         
         if None in time_data:
             raise ValueError("Time has no correct values.")
@@ -48,12 +52,24 @@ def main():
                           
             print(time_data)
             
-            if current_hour == 0 and current_minute == 0 and current_second == 0:
-                time_data = initialize_time.get_time_from_api()
+            if current_second == 0:
+                try:
+                    led.off()
+                    fetch_start = time.time()
+                    time_data = fetch_time()
+                    fetch_duration = time.time() - fetch_start
+                    
+                    print(fetch_duration)
                 
-                if None not in time_data:
-                    current_hour, current_minute, current_second, current_year, current_month, current_day = time_data
+                    if None not in time_data:
+                        print("Synchronizing successful.")
+                        current_hour, current_minute, current_second, current_year, current_month, current_day = time_data
+                    else:
+                        print("Synchronizing unsuccessful.")
+                        current_second += int(fetch_duration)
 
+                except Exception as e:
+                    print(f"Error fetching new time: {e}")
             
             led_on = not led_on
         
@@ -72,3 +88,4 @@ def is_leap_year(year):
     
 if __name__ == "__main__":
     main()
+    
