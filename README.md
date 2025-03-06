@@ -1,4 +1,4 @@
-# pico-w-clock-display
+# Pico W Clock Display
 
 Enter your WiFi credentials in the `lib/env.py` file.
 
