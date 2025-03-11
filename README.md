@@ -1,5 +1,7 @@
 # Pico W Clock Display
 
+Flash your Pico with MicroPython.
+
 Enter your WiFi credentials in the `lib/env.py` file.
 
 As soon as the `Pico` is plugged in, it connects to the specified WiFi Access Point.
