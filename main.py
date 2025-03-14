@@ -88,7 +88,7 @@ def main():
                     print(f"Error fetching new time: {e}")
 
     except ValueError as ve:
-        print(f"Error fetching the current time: {ve}")
+        print(f"Error fetching the current time. Please check your connection or the API: {ve}")
         
     except KeyboardInterrupt:
         led.off()
