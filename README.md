@@ -1,4 +1,4 @@
-# Pico W Clock Display
+# Pico W Clock OLED Display
 
 Flash your Pico with MicroPython.
 
