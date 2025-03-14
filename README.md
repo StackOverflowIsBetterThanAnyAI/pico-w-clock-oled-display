@@ -18,4 +18,6 @@ Then, it fetches the current time from an open API, disconnects from the WiFi an
 
 The default time zone is equal to Europe/Berlin, but it can easily be changed in the `initialize_time.py` file by referring to [the official docs](https://timeapi.io/swagger/index.html).
 
+The default time format is `hh:mm:ss`, and the corresponding date format is `DD.MM.YYYY`, which can be modified in the `display.py` file.
+
 Every new day at 00:00:00 (can be edited in the `main.py` file), the time is synchronized again by reconnecting to the Access Point, if it is available.
