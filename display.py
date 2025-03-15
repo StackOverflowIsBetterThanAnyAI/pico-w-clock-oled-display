@@ -96,6 +96,15 @@ def start_display():
     oled.fill_rect(0, 51, 128, 17, oled.black)
     oled.show()
     
+def display_message(message, x_value):
+    oled.fill(0x0000)
+    oled.text(message, x_value, 29, oled.white)
+    oled.show()
+    
+    time.sleep(0.5)
+    oled.fill(0x0000)
+    oled.show()
+
 def update_display(hour, minute, second, year, month, day):
     start_time = time.ticks_ms()
 
