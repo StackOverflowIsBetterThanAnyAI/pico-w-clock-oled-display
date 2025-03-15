@@ -41,13 +41,13 @@ def main():
             if keyA.value() == 0:
                 print("Restarting ...")
                 display_message("Restarting ...", 12)
-                fetch_time()
+                main()
             
             if keyB.value() == 0:
                 led.off()
                 print("Program has been terminated by the user.")
                 clear_display()
-                break
+                machine.deepsleep()
             
             now = time.ticks_ms()
             elapsed = time.ticks_diff(now, last_time)
