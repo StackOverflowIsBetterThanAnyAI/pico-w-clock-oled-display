@@ -16,16 +16,19 @@ def connect_to_wifi():
         
         print("Connecting ...")
         
+        fails = 0
+        
         while not wlan.isconnected():
             led.on()
             print("Waiting for Connection ...")
             time.sleep(0.75)
             led.off()
             print(wlan.status())
-            if wlan.status() <= -1:
+            if wlan.status() <= -1 or fails >= 10:
                 raise Exception("Unable to connect to an Access Point.")
             time.sleep(0.25)
-    
+            fails += 1
+            
         print(f"Connected on: {wlan.ifconfig()[0]}")
         led.off()
         
