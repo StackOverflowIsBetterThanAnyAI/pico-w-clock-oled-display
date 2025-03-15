@@ -3,7 +3,7 @@ import initialize_time
 import machine
 import time
 
-from display import update_display, clear_display
+from display import update_display, clear_display, start_display
 
 led = machine.Pin('LED', machine.Pin.OUT)
 
@@ -11,6 +11,7 @@ led_on = False
 
 def fetch_time():
     try:
+        start_display()
         connect.connect_to_wifi()
         time_data = initialize_time.get_time_from_api()
         connect.disconnect_wifi()
@@ -88,7 +89,9 @@ def main():
                     print(f"Error fetching new time: {e}")
 
     except ValueError as ve:
+        led.off()
         print(f"Error fetching the current time. Please check your connection or the API: {ve}")
+        clear_display()
         
     except KeyboardInterrupt:
         led.off()
@@ -96,7 +99,9 @@ def main():
         clear_display()
         
     except Exception as e:
+        led.off()
         print(f"An unexpected error has occurred: {e}")
+        clear_display()
         
 def is_leap_year(year):
     return (year % 4 == 0) and (year % 100 != 0 or year % 400 == 0)
