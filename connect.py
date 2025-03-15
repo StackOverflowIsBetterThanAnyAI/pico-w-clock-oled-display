@@ -3,6 +3,7 @@ import time
 import machine
 
 from lib.env import SSID, PASSWORD
+from display import display_message
 
 led = machine.Pin('LED', machine.Pin.OUT)
 
@@ -21,6 +22,7 @@ def connect_to_wifi():
         while not wlan.isconnected():
             led.on()
             print("Waiting for Connection ...")
+            display_message("Connecting ...", 12)
             time.sleep(0.75)
             led.off()
             print(wlan.status())
@@ -30,6 +32,7 @@ def connect_to_wifi():
             fails += 1
             
         print(f"Connected on: {wlan.ifconfig()[0]}")
+        display_message("Success", 32)
         led.off()
         
     except Exception as e:
