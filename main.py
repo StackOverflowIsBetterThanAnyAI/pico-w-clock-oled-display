@@ -3,9 +3,12 @@ import initialize_time
 import machine
 import time
 
-from display import update_display, clear_display, start_display
+from display import update_display, clear_display, start_display, display_message
 
 led = machine.Pin('LED', machine.Pin.OUT)
+
+keyA = machine.Pin(15, machine.Pin.IN, machine.Pin.PULL_UP)
+keyB = machine.Pin(17, machine.Pin.IN, machine.Pin.PULL_UP)
 
 led_on = False
 
@@ -35,6 +38,17 @@ def main():
         last_time = time.ticks_ms()
         
         while True:
+            if keyA.value() == 0:
+                print("Restarting ...")
+                display_message("Restarting ...", 12)
+                fetch_time()
+            
+            if keyB.value() == 0:
+                led.off()
+                print("Program has been terminated by the user.")
+                clear_display()
+                break
+            
             now = time.ticks_ms()
             elapsed = time.ticks_diff(now, last_time)
             
@@ -86,7 +100,7 @@ def main():
                         current_second += int(fetch_duration)
 
                 except Exception as e:
-                    print(f"Error fetching new time: {e}")
+                    print(f"Error fetching new time: {e}")              
 
     except ValueError as ve:
         led.off()
