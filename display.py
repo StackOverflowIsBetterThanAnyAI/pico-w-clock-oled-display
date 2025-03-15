@@ -27,6 +27,7 @@ class OLED_1inch3(framebuf.FrameBuffer):
         self.init_display()
         
         self.white = 0xffff
+        self.black = 0x0000
         
     def write_cmd(self, cmd):
         self.cs(1)
@@ -68,6 +69,33 @@ class OLED_1inch3(framebuf.FrameBuffer):
 
 oled = OLED_1inch3()
 
+def start_display():
+    oled.fill(0x0000)
+    oled.fill_rect(0, 0, 128, 17, oled.white)
+    oled.show()
+    
+    time.sleep(0.25)
+    oled.fill_rect(0, 17, 128, 17, oled.white)
+    oled.show()
+    
+    time.sleep(0.25)
+    oled.fill_rect(0, 0, 128, 17, oled.black)
+    oled.fill_rect(0, 34, 128, 17, oled.white)
+    oled.show()
+    
+    time.sleep(0.25)
+    oled.fill_rect(0, 17, 128, 17, oled.black)
+    oled.fill_rect(0, 51, 128, 17, oled.white)
+    oled.show()
+    
+    time.sleep(0.25)
+    oled.fill_rect(0, 34, 128, 17, oled.black)
+    oled.show()
+    
+    time.sleep(0.25)
+    oled.fill_rect(0, 51, 128, 17, oled.black)
+    oled.show()
+    
 def update_display(hour, minute, second, year, month, day):
     start_time = time.ticks_ms()
 
