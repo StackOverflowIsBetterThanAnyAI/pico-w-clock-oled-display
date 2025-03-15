@@ -29,7 +29,7 @@ def get_time_from_api():
             print(data)
             current_hour= data["hour"]
             current_minute = data["minute"]
-            current_second =data["seconds"]
+            current_second = data["seconds"]
             
             current_year = data["year"]
             current_month = data["month"]
