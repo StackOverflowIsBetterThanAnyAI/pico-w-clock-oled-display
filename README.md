@@ -23,3 +23,6 @@ The default time zone is equal to Europe/Berlin, but it can easily be changed in
 The default time format is `hh:mm:ss`, and the corresponding date format is `DD.MM.YYYY`, which can be modified in the `display.py` file.
 
 Every new day at 00:00:00 (can be edited in the `main.py` file), the time is synchronized again by reconnecting to the Access Point, if it is available.
+
+By pressing `KEY0`, the program is restarted, pressing `KEY1` leads to a termination of the process.
+
