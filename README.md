@@ -12,17 +12,16 @@
 
 Flash your Pico with [MicroPython](https://www.raspberrypi.com/documentation/microcontrollers/micropython.html).
 
-Enter your WiFi credentials in the `lib/env.py` file.
+Enter your WiFi credentials in the [`lib/env.py`](https://github.com/StackOverflowIsBetterThanAnyAI/pico-w-clock-oled-display/blob/main/lib/env.py) file.
 
 As soon as the `Pico` is plugged in, it connects to the specified WiFi Access Point.
 
 Then, it fetches the current time from an open API, disconnects from the WiFi and updates the time every second.
 
-The default time zone is equal to Europe/Berlin, but it can easily be changed in the `initialize_time.py` file by referring to [the official docs](https://timeapi.io/swagger/index.html).
+The default time zone is equal to Europe/Berlin, but it can easily be changed in the [`initialize_time.py`](https://github.com/StackOverflowIsBetterThanAnyAI/pico-w-clock-oled-display/blob/main/initialize_time.py) file by referring to [the official docs](https://timeapi.io/swagger/index.html).
 
-The default time format is `hh:mm:ss`, and the corresponding date format is `DD.MM.YYYY`, which can be modified in the `display.py` file.
+The default time format is `hh:mm:ss`, and the corresponding date format is `DD.MM.YYYY`, which can be modified in the [`display.py`](https://github.com/StackOverflowIsBetterThanAnyAI/pico-w-clock-oled-display/blob/main/display.py) file.
 
-Every new day at 00:00:00 (can be edited in the `main.py` file), the time is synchronized again by reconnecting to the Access Point, if it is available.
+Every new day at 00:00:00 (can be edited in the [`main.py`](https://github.com/StackOverflowIsBetterThanAnyAI/pico-w-clock-oled-display/blob/main/main.py) file), the time is synchronized again by reconnecting to the Access Point, if it is available.
 
-By pressing `KEY0`, the program is restarted, pressing `KEY1` leads to a termination of the process.
-
+By pressing `KEY0`, the program is restarted, pressing `KEY1` leads to clearing the screen.
