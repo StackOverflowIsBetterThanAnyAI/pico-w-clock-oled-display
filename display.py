@@ -155,14 +155,6 @@ def start_display():
 def toggle_screensaver(display_on):
     oled.fill(0x0000)
     oled.show()
-    
-    oled.text("Display OFF" if display_on else "DISPLAY ON", 18 if display_on else 23, 29, oled.white)
-    oled.show()
-    
-    time.sleep(1)
-    
-    oled.fill(0x0000)
-    oled.show()
 
 def update_display(hour, minute, second, year, month, day, display_on):
     if display_on:
