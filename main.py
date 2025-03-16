@@ -3,7 +3,7 @@ import initialize_time
 import machine
 import time
 
-from display import update_display, clear_display, start_display, display_message
+from display import update_display, clear_display, start_display, display_message, restart_display
 
 led = machine.Pin('LED', machine.Pin.OUT)
 
@@ -40,7 +40,7 @@ def main():
         while True:
             if keyA.value() == 0:
                 print("Restarting ...")
-                display_message("Restarting ...", 12)
+                restart_display()
                 main()
             
             if keyB.value() == 0:
