@@ -136,3 +136,16 @@ def clear_display():
     
     oled.fill(0x0000)
     oled.show()
+    
+def restart_display():    
+    oled.fill(0x0000)
+    oled.show()
+    
+    time.sleep(0.5)
+    oled.text("Restarting ...", 12, 29, oled.white)
+    oled.show()
+    
+    time.sleep(1)
+    
+    oled.fill(0x0000)
+    oled.show()
