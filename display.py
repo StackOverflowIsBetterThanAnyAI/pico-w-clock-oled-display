@@ -98,11 +98,10 @@ def start_display():
     
 def display_message(message, x_value):
     oled.fill(0x0000)
-    oled.text(message, x_value, 29, oled.white)
     oled.show()
     
     time.sleep(0.5)
-    oled.fill(0x0000)
+    oled.text(message, x_value, 29, oled.white)
     oled.show()
 
 def update_display(hour, minute, second, year, month, day):
