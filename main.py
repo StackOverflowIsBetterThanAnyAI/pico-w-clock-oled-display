@@ -41,7 +41,8 @@ def main():
             if keyA.value() == 0:
                 print("Restarting ...")
                 restart_display()
-                main()
+                time.sleep(0.5)
+                machine.reset()
             
             if keyB.value() == 0:
                 led.off()
