@@ -38,16 +38,22 @@ def main():
         
         last_time = time.ticks_ms()
         
+        keyB_pressed = False
+        
         while True:
             if keyA.value() == 0:
                 restart_display()
                 machine.reset()
             
-            if keyB.value() == 0:
+            if keyB.value() == 0 and not keyB_pressed:
                 led.off()
                 toggle_screensaver(display_on)
                 display_on = not display_on
-            
+                keyB_pressed = True
+
+            if keyB.value() == 1:
+                keyB_pressed = False
+
             now = time.ticks_ms()
             elapsed = time.ticks_diff(now, last_time)
             
