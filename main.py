@@ -37,13 +37,22 @@ def main():
         current_hour, current_minute, current_second, current_year, current_month, current_day = time_data
         
         last_time = time.ticks_ms()
-        
+        keyA_start_tick = None        
         keyB_pressed = False
         
         while True:
             if keyA.value() == 0:
-                restart_display()
-                machine.reset()
+                if keyA_start_tick is None:
+                    keyA_start_tick = time.ticks_ms()
+                elif time.ticks_diff(time.ticks_ms(), keyA_start_tick) >= 5000:
+                    print("Shutting down...")
+                    clear_display()
+                    sys.exit()
+            else:
+                if keyA_start_tick is not None and time.ticks_diff(time.ticks_ms(), keyA_start_tick) < 5000:
+                    restart_display()
+                    machine.reset()
+                keyA_start_tick = None
             
             if keyB.value() == 0 and not keyB_pressed:
                 led.off()
