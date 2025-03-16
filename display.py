@@ -69,62 +69,6 @@ class OLED_1inch3(framebuf.FrameBuffer):
 
 oled = OLED_1inch3()
 
-def start_display():
-    oled.fill(0x0000)
-    oled.fill_rect(0, 0, 128, 17, oled.white)
-    oled.show()
-    
-    time.sleep(0.25)
-    oled.fill_rect(0, 17, 128, 17, oled.white)
-    oled.show()
-    
-    time.sleep(0.25)
-    oled.fill_rect(0, 0, 128, 17, oled.black)
-    oled.fill_rect(0, 34, 128, 17, oled.white)
-    oled.show()
-    
-    time.sleep(0.25)
-    oled.fill_rect(0, 17, 128, 17, oled.black)
-    oled.fill_rect(0, 51, 128, 17, oled.white)
-    oled.show()
-    
-    time.sleep(0.25)
-    oled.fill_rect(0, 34, 128, 17, oled.black)
-    oled.show()
-    
-    time.sleep(0.25)
-    oled.fill_rect(0, 51, 128, 17, oled.black)
-    oled.show()
-    
-def display_message(message, x_value):
-    oled.fill(0x0000)
-    oled.show()
-    
-    time.sleep(0.5)
-    oled.text(message, x_value, 29, oled.white)
-    oled.show()
-
-def update_display(hour, minute, second, year, month, day):
-    start_time = time.ticks_ms()
-
-    oled.fill(0x0000)
-
-    time_string = f"{hour:02}:{minute:02}:{second:02}"
-    date_string = f"{day:02}.{month:02}.{year}"
-    
-    print(time_string)
-    print(date_string)
-
-    oled.text("Time:", 10, 10, oled.white)
-    oled.text(time_string, 10, 20, oled.white)
-    oled.text("Date:", 10, 35, oled.white)
-    oled.text(date_string, 10, 45, oled.white)
-    
-    oled.show()
-    
-    end_time = time.ticks_ms()
-    print(f"Updating Display took: {end_time - start_time} ms")
-
 def clear_display():    
     oled.fill(0x0000)
     oled.show()
@@ -135,6 +79,14 @@ def clear_display():
     time.sleep(2)
     
     oled.fill(0x0000)
+    oled.show()
+    
+def display_message(message, x_value):
+    oled.fill(0x0000)
+    oled.show()
+    
+    time.sleep(0.5)
+    oled.text(message, x_value, 29, oled.white)
     oled.show()
     
 def restart_display():    
@@ -149,3 +101,86 @@ def restart_display():
     
     oled.fill(0x0000)
     oled.show()
+
+def start_display():
+    oled.fill(0x0000)
+    oled.show()
+    
+    x_end = 0
+    while x_end <= 63:
+        oled.line(0, 0, 127, x_end, oled.white)
+        oled.show()
+        x_end += 8
+
+    x_start = 0
+    while x_start <= 63:
+        oled.line(0, x_start, 127, 63, oled.white)
+        oled.show()
+        x_start += 8
+    
+    oled.line(0, 63, 0, 0, oled.white)
+    oled.show()
+    
+    oled.line(0, 0, 127, 0, oled.white)
+    oled.show()
+    
+    oled.line(127, 0, 127, 63, oled.white)
+    oled.show()
+    
+    oled.line(127, 63, 0, 63, oled.white)
+    oled.show()
+
+    y_end = 63
+    while y_end >= 0:
+        oled.line(0, 63, 127, y_end, oled.white)
+        oled.show()
+        y_end -= 8
+
+    y_start = 63
+    while y_start >= 0:
+        oled.line(127, 0, 0, y_start, oled.white)
+        oled.show()
+        y_start -= 8
+        
+    y = 0
+    while y <= 63:
+        oled.fill_rect(0, y, 127, y+4, oled.white)
+        oled.show()
+        y += 4
+        
+    oled.text("Hello World!", 16, 29, oled.black)
+    oled.show()
+        
+def toggle_screensaver(display_on):
+    oled.fill(0x0000)
+    oled.show()
+    
+    oled.text("Display OFF" if display_on else "DISPLAY ON", 18 if display_on else 23, 29, oled.white)
+    oled.show()
+    
+    time.sleep(1)
+    
+    oled.fill(0x0000)
+    oled.show()
+
+def update_display(hour, minute, second, year, month, day, display_on):
+    if display_on:
+        start_time = time.ticks_ms()
+
+        oled.fill(0x0000)
+
+        time_string = f"{hour:02}:{minute:02}:{second:02}"
+        date_string = f"{day:02}.{month:02}.{year}"
+    
+        print(time_string)
+        print(date_string)
+
+        oled.text("Time:", 10, 10, oled.white)
+        oled.text(time_string, 10, 20, oled.white)
+        oled.text("Date:", 10, 35, oled.white)
+        oled.text(date_string, 10, 45, oled.white)
+    
+        oled.show()
+    
+        end_time = time.ticks_ms()
+        print(f"Updating Display took: {end_time - start_time} ms")
