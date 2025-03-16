@@ -7,6 +7,10 @@
 * [Pico OLED 1.3 Display](https://www.berrybase.de/en/1.3-64-128-oled-display-modul-fuer-raspberry-pi-pico)
 
   * used in SPI mode
+ 
+  * 1.3" 64×128 px
+ 
+  * SH1107
 
 ## Installation Guide:
 
