@@ -82,8 +82,9 @@ def main():
                 
                 update_display(current_hour, current_minute, current_second, current_year, current_month, current_day, display_on)
                 
-                led_on = not led_on
-                led.value(led_on)
+                if display_on:
+                    led_on = not led_on
+                    led.value(led_on)
             
             if current_hour == 0 and current_minute == 0 and current_second == 0:
                 try:
