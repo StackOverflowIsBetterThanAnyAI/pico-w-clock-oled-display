@@ -94,6 +94,7 @@ def restart_display():
     oled.show()
     
     time.sleep(0.5)
+    print("Restarting ...")
     oled.text("Restarting ...", 12, 29, oled.white)
     oled.show()
     
