@@ -30,4 +30,4 @@ Every new day at 00:00:00 (can be edited in the [`main.py`](https://github.com/S
 
 By pressing `KEY0`, the program is restarted, pressing `KEY1` leads to clearing the screen. The content reappears after pressing `KEY1` once again.
 
-Holding down `KEY0` for five seconds will shotdown the `Pico` safely.
+Holding down `KEY0` for five seconds will shutdown the `Pico` safely.
