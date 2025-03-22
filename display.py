@@ -1,5 +1,6 @@
 from machine import Pin, SPI
 import framebuf
+import math
 import time
 
 DC = 8
@@ -102,6 +103,117 @@ def restart_display():
     
     oled.fill(0x0000)
     oled.show()
+    
+def show_time(hour, minute, second):
+    hour_0 = hour % 10
+    hour_1 = math.floor(hour / 10)
+    minute_0 = minute % 10
+    minute_1 = math.floor(minute / 10)
+    second_0 = second % 10
+    second_1 = math.floor(second / 10)
+    print(f"{hour_1}{hour_0}:{minute_1}{minute_0}:{second_1}{second_0}")
+
+    if hour_1 == 0:
+        oled.fill_rect(3, 16, 4, 14, oled.white)
+    if hour_1 == 0 or hour_1 == 1:
+        oled.fill_rect(15, 34, 4, 14, oled.white)
+    if hour_1 == 0 or hour_1 == 2:
+        oled.fill_rect(7, 12, 8, 4, oled.white)
+        oled.fill_rect(3, 34, 4, 14, oled.white)
+        oled.fill_rect(7, 48, 8, 4, oled.white)
+    if hour_1 == 0 or hour_1 == 1 or hour_1 == 2:
+        oled.fill_rect(15, 16, 4, 14, oled.white)
+    if hour_1 == 2:
+        oled.fill_rect(7, 30, 8, 4, oled.white)
+
+    if hour_0 in [0, 2, 3, 5, 6, 7, 8, 9]:
+        oled.fill_rect(27, 12, 8, 4, oled.white)
+    if hour_0 in [0, 4, 5, 6, 8, 9]:
+        oled.fill_rect(23, 16, 4, 14, oled.white)
+    if hour_0 in [0, 1, 2, 3, 4, 7, 8, 9]:
+        oled.fill_rect(35, 16, 4, 14, oled.white)
+    if hour_0 in [2, 3, 4, 5, 6, 8, 9]:
+        oled.fill_rect(27, 30, 8, 4, oled.white)
+    if hour_0 in [0, 2, 6, 8]:
+        oled.fill_rect(23, 34, 4, 14, oled.white)
+    if hour_0 in [0, 1, 3, 4, 5, 6, 7, 8, 9]:
+        oled.fill_rect(35, 34, 4, 14, oled.white)
+    if hour_0 in [0, 2, 3, 5, 6, 8, 9]:
+        oled.fill_rect(27, 48, 8, 4, oled.white)
+
+    oled.fill_rect(43, 29, 4, 4, oled.white)
+    oled.fill_rect(43, 35, 4, 4, oled.white)
+
+    if minute_1 in [0, 2, 3, 5, 6, 7, 8, 9]:
+        oled.fill_rect(55, 12, 8, 4, oled.white)
+    if minute_1 in [0, 4, 5, 6, 8, 9]:
+        oled.fill_rect(51, 16, 4, 14, oled.white)
+    if minute_1 in [0, 1, 2, 3, 4, 7, 8, 9]:
+        oled.fill_rect(63, 16, 4, 14, oled.white)
+    if minute_1 in [2, 3, 4, 5, 6, 8, 9]:
+        oled.fill_rect(55, 30, 8, 4, oled.white)
+    if minute_1 in [0, 2, 6, 8]:
+        oled.fill_rect(51, 34, 4, 14, oled.white)
+    if minute_1 in [0, 1, 3, 4, 5, 6, 7, 8, 9]:
+        oled.fill_rect(63, 34, 4, 14, oled.white)
+    if minute_1 in [0, 2, 3, 5, 6, 8, 9]:
+        oled.fill_rect(55, 48, 8, 4, oled.white)
+
+    if minute_0 in [0, 2, 3, 5, 6, 7, 8, 9]:
+        oled.fill_rect(75, 12, 8, 4, oled.white)
+    if minute_0 in [0, 4, 5, 6, 8, 9]:
+        oled.fill_rect(71, 16, 4, 14, oled.white)
+    if minute_0 in [0, 1, 2, 3, 4, 7, 8, 9]:
+        oled.fill_rect(83, 16, 4, 14, oled.white)
+    if minute_0 in [2, 3, 4, 5, 6, 8, 9]:
+        oled.fill_rect(75, 30, 8, 4, oled.white)
+    if minute_0 in [0, 2, 6, 8]:
+        oled.fill_rect(71, 34, 4, 14, oled.white)
+    if minute_0 in [0, 1, 3, 4, 5, 6, 7, 8, 9]:
+        oled.fill_rect(83, 34, 4, 14, oled.white)
+    if minute_0 in [0, 2, 3, 5, 6, 8, 9]:
+        oled.fill_rect(75, 48, 8, 4, oled.white)
+
+    if second_1 in [0, 2, 3, 5, 6, 7, 8, 9]:
+        oled.fill_rect(97, 24, 6, 4, oled.white)
+    if second_1 in [0, 4, 5, 6, 8, 9]:
+        oled.fill_rect(93, 28, 4, 8, oled.white)
+    if second_1 in [0, 1, 2, 3, 4, 7, 8, 9]:
+        oled.fill_rect(103, 28, 4, 8, oled.white)
+    if second_1 in [2, 3, 4, 5, 6, 8, 9]:
+        oled.fill_rect(97, 36, 6, 4, oled.white)
+    if second_1 in [0, 2, 6, 8]:
+        oled.fill_rect(93, 40, 4, 8, oled.white)
+    if second_1 in [0, 1, 3, 4, 5, 6, 7, 8, 9]:
+        oled.fill_rect(103, 40, 4, 8, oled.white)
+    if second_1 in [0, 2, 3, 5, 6, 8, 9]:
+        oled.fill_rect(97, 48, 6, 4, oled.white)
+
+    if second_0 in [0, 2, 3, 5, 6, 7, 8, 9]:
+        oled.fill_rect(115, 24, 6, 4, oled.white)
+    if second_0 in [0, 4, 5, 6, 8, 9]:
+        oled.fill_rect(111, 28, 4, 8, oled.white)
+    if second_0 in [0, 1, 2, 3, 4, 7, 8, 9]:
+        oled.fill_rect(121, 28, 4, 8, oled.white)
+    if second_0 in [2, 3, 4, 5, 6, 8, 9]:
+        oled.fill_rect(115, 36, 6, 4, oled.white)
+    if second_0 in [0, 2, 6, 8]:
+        oled.fill_rect(111, 40, 4, 8, oled.white)
+    if second_0 in [0, 1, 3, 4, 5, 6, 7, 8, 9]:
+        oled.fill_rect(121, 40, 4, 8, oled.white)
+    if second_0 in [0, 2, 3, 5, 6, 8, 9]:
+        oled.fill_rect(115, 48, 6, 4, oled.white)
+    
+def show_time_and_date(hour, minute, second, year, month, day):
+    time_string = f"{hour:02}:{minute:02}:{second:02}"
+    print(time_string)
+    oled.text("Time:", 10, 10, oled.white)
+    oled.text(time_string, 10, 20, oled.white)
+    
+    date_string = f"{day:02}.{month:02}.{year}"
+    print(date_string)
+    oled.text("Date:", 10, 35, oled.white)
+    oled.text(date_string, 10, 45, oled.white)
 
 def start_display():
     oled.fill(0x0000)
@@ -152,28 +264,21 @@ def start_display():
     oled.text("Hello World!", 16, 29, oled.black)
     oled.show()
         
-def toggle_screensaver(display_on):
+def toggle_display_mode():
     oled.fill(0x0000)
     oled.show()
 
-def update_display(hour, minute, second, year, month, day, display_on):
-    if display_on:
-        start_time = time.ticks_ms()
+def update_display(hour, minute, second, year, month, day, display_mode):
+    start_time = time.ticks_ms()
 
-        oled.fill(0x0000)
+    oled.fill(0x0000)
+    
+    if display_mode == 0:
+        show_time_and_date(hour, minute, second, year, month, day)
+    else:
+        show_time(hour, minute, second)
 
-        time_string = f"{hour:02}:{minute:02}:{second:02}"
-        date_string = f"{day:02}.{month:02}.{year}"
-    
-        print(time_string)
-        print(date_string)
+    oled.show()
 
-        oled.text("Time:", 10, 10, oled.white)
-        oled.text(time_string, 10, 20, oled.white)
-        oled.text("Date:", 10, 35, oled.white)
-        oled.text(date_string, 10, 45, oled.white)
-    
-        oled.show()
-    
-        end_time = time.ticks_ms()
-        print(f"Updating Display took: {end_time - start_time} ms")
+    end_time = time.ticks_ms()
+    print(f"Updating Display took: {end_time - start_time} ms")
