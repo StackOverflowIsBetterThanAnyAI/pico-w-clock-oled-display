@@ -54,6 +54,6 @@ if current_hour == 0 and current_minute == 0 and current_second == 0:
 
 <br/>
 
-By pressing `KEY0`, the program is restarted, pressing `KEY1` leads to clearing the screen. The content reappears after pressing `KEY1` once again.
+By pressing `KEY0`, the program is restarted, pressing `KEY1` switches between displaying the current date and time, only displaying the time, and clearing the screen completely.
 
 Holding down `KEY0` for five seconds will shutdown the `Pico` safely.
