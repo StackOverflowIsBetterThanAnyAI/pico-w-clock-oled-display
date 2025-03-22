@@ -4,14 +4,14 @@ import machine
 import sys
 import time
 
-from display import clear_display, restart_display, start_display, toggle_screensaver, update_display
+from display import clear_display, restart_display, start_display, toggle_display_mode, update_display
 
 led = machine.Pin('LED', machine.Pin.OUT)
 
 keyA = machine.Pin(15, machine.Pin.IN, machine.Pin.PULL_UP)
 keyB = machine.Pin(17, machine.Pin.IN, machine.Pin.PULL_UP)
 
-display_on = True
+display_mode = 0
 led_on = False
 
 def fetch_time():
@@ -27,7 +27,7 @@ def fetch_time():
         clear_display()
 
 def main():
-    global led_on, display_on
+    global led_on, display_mode
     
     try:
         time_data = fetch_time()
@@ -57,8 +57,12 @@ def main():
             
             if keyB.value() == 0 and not keyB_pressed:
                 led.off()
-                toggle_screensaver(display_on)
-                display_on = not display_on
+                display_mode = (display_mode + 1) % 3
+                if display_mode == 2:
+                    toggle_display_mode()
+                else:
+                    update_display(current_hour, current_minute, current_second, current_year, current_month, current_day, display_mode)
+                print(f"Display mode: {display_mode}")
                 keyB_pressed = True
 
             if keyB.value() == 1:
@@ -96,9 +100,8 @@ def main():
                 
                 time_data = current_hour, current_minute, current_second, current_year, current_month, current_day
                 
-                update_display(current_hour, current_minute, current_second, current_year, current_month, current_day, display_on)
-                
-                if display_on:
+                if display_mode != 2:
+                    update_display(current_hour, current_minute, current_second, current_year, current_month, current_day, display_mode)
                     led_on = not led_on
                     led.value(led_on)
             
