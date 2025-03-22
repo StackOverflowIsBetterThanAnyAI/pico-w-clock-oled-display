@@ -1,6 +1,7 @@
 import connect
 import initialize_time
 import machine
+import sys
 import time
 
 from display import clear_display, restart_display, start_display, toggle_screensaver, update_display
