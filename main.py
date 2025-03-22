@@ -46,7 +46,7 @@ def main():
                 if keyA_start_tick is None:
                     keyA_start_tick = time.ticks_ms()
                 elif time.ticks_diff(time.ticks_ms(), keyA_start_tick) >= 5000:
-                    print("Shutting down...")
+                    print("Shutting down ...")
                     clear_display()
                     sys.exit()
             else:
