@@ -25,7 +25,7 @@ def connect_to_wifi():
             display_message("Connecting ...", 12)
             time.sleep(0.75)
             led.off()
-            print(wlan.status())
+            print(f"WiFi Status: {wlan.status()}")
             if wlan.status() <= -1 or fails >= 10:
                 raise Exception("Unable to connect to an Access Point.")
             time.sleep(0.25)
@@ -41,5 +41,5 @@ def connect_to_wifi():
 def disconnect_wifi():
     wlan = network.WLAN(network.STA_IF)
     wlan.disconnect()
-    print(wlan.status())
+    print(f"WiFi Status: {wlan.status()}")
     print("Disconnected from WiFi.")
