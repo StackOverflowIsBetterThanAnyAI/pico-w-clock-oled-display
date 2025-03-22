@@ -69,6 +69,10 @@ class OLED_1inch3(framebuf.FrameBuffer):
                 self.write_data(self.buffer[page*16+num])
 
 oled = OLED_1inch3()
+        
+def activate_screensaver():
+    oled.fill(0x0000)
+    oled.show()
 
 def clear_display():    
     oled.fill(0x0000)
@@ -262,10 +266,6 @@ def start_display():
         y += 4
         
     oled.text("Hello World!", 16, 29, oled.black)
-    oled.show()
-        
-def toggle_display_mode():
-    oled.fill(0x0000)
     oled.show()
 
 def update_display(hour, minute, second, year, month, day, display_mode):
