@@ -19,9 +19,9 @@ def get_time_from_api():
     try:
         print("Fetching current time ...")
         wlan = network.WLAN(network.STA_IF)
-        print(wlan.status())
+        print(f"WiFi Status: {wlan.status()}")
         response = urequests.get("https://timeapi.io/api/time/current/zone?timeZone=Europe%2FBerlin")
-        print(response.status_code)
+        print(f"Response Status Code: {response.status_code}")
         
         if response.status_code == 200:
             led.off()
