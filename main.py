@@ -4,7 +4,7 @@ import machine
 import sys
 import time
 
-from display import clear_display, restart_display, start_display, toggle_display_mode, update_display
+from display import activate_screensaver, clear_display, restart_display, start_display, update_display
 
 led = machine.Pin('LED', machine.Pin.OUT)
 
@@ -59,7 +59,7 @@ def main():
                 led.off()
                 display_mode = (display_mode + 1) % 3
                 if display_mode == 2:
-                    toggle_display_mode()
+                    activate_screensaver()
                 else:
                     update_display(current_hour, current_minute, current_second, current_year, current_month, current_day, display_mode)
                 print(f"Display mode: {display_mode}")
