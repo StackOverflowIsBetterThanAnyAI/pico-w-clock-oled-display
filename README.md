@@ -12,6 +12,8 @@
  
   * SH1107
 
+![Preview Image](https://github.com/StackOverflowIsBetterThanAnyAI/pico-w-clock-oled-display/blob/main/preview.jpg)
+
 ## Installation Guide:
 
 Flash your Pico with [MicroPython](https://www.raspberrypi.com/documentation/microcontrollers/micropython.html).
