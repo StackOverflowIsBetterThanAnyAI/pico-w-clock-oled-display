@@ -274,9 +274,9 @@ def update_display(hour, minute, second, year, month, day, display_mode):
     oled.fill(0x0000)
     
     if display_mode == 0:
-        show_time_and_date(hour, minute, second, year, month, day)
-    else:
         show_time(hour, minute, second)
+    else:
+        show_time_and_date(hour, minute, second, year, month, day)
 
     oled.show()
 
